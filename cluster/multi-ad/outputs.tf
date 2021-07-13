@@ -17,5 +17,9 @@ output "Elasticsearch_URL_via_LBaaS" {
 
 output "generated_ssh_private_key" {
   value = tls_private_key.public_private_key_pair.private_key_pem
+  sensitive = true
 }
 
+output "bastion_ssh_metadata" {
+  value = oci_bastion_session.ssh_via_bastion_service.*.ssh_metadata
+}

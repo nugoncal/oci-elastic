@@ -21,6 +21,7 @@ variableGroups:
   - kibana_download_url
   - create_timeout
   - volume_attachment_attachment_type
+  - availablity_domain_number
 
 - title: "Required Configuration"
   visible: true  
@@ -112,6 +113,14 @@ variables:
     type: oci:identity:compartment:id
     required: true
     visible: true
+
+  use_bastion_service:
+    type: boolean
+    visibile: true
+    default: false
+    required: false
+    title: "Use OCI Bastion Service"
+    description: "Check the box to use OCI Bastion Service instead of Bastion Host VM."
 
   # Optional Configuration 
 
