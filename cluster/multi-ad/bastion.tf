@@ -5,7 +5,7 @@ resource "oci_bastion_bastion" "bastion-service" {
   count                        = var.use_bastion_service ? 1 : 0
   bastion_type                 = "STANDARD"
   compartment_id               = var.compartment_ocid
-  target_subnet_id             = oci_core_subnet.vcn01_subnet_pub02.id
+  target_subnet_id             = oci_core_subnet.BastionSubnetAD1.id
   client_cidr_block_allow_list = ["0.0.0.0/0"]
   defined_tags                 = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
   name                         = "BastionService${random_id.tag.hex}"
@@ -84,7 +84,7 @@ resource "oci_bastion_session" "ssh_via_bastion_service" {
 
 resource "oci_core_instance" "BastionHost" {
   count               = var.use_bastion_service ? 0 : 1
-  availability_domain = var.availablity_domain_name == "" ? data.oci_identity_availability_domains.ADs.availability_domains[var.availablity_domain_number]["name"] : var.availablity_domain_name
+  availability_domain = var.availability_domain_name == "" ? data.oci_identity_availability_domains.ADs.availability_domains[var.availablity_domain_number]["name"] : var.availablity_domain_name
   compartment_id      = var.compartment_ocid
   display_name        = "BastionHost"
   shape               = var.BastionShape
