@@ -5,24 +5,16 @@ resource "oci_bastion_bastion" "bastion-service" {
   count                        = var.use_bastion_service ? 1 : 0
   bastion_type                 = "STANDARD"
   compartment_id               = var.compartment_ocid
-  target_subnet_id             = oci_core_subnet.BastionSubnetAD1.id
+  target_subnet_id             = oci_core_subnet.PrivSubnetAD1.id
   client_cidr_block_allow_list = ["0.0.0.0/0"]
   defined_tags                 = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
   name                         = "BastionService${random_id.tag.hex}"
   max_session_ttl_in_seconds   = 1800
 }
 
-resource "oci_bastion_session" "ssh_via_bastion_service" {
-  /*depends_on = [oci_core_instance.tomcat-server,
-    oci_core_nat_gateway.vcn01_nat_gateway,
-    oci_core_route_table_attachment.vcn01_subnet_app01_route_table_attachment,
-    oci_core_route_table.vnc01_nat_route_table,
-    oci_core_network_security_group.SSHSecurityGroup,
-    oci_core_network_security_group_security_rule.SSHSecurityEgressGroupRule,
-    oci_core_network_security_group_security_rule.SSHSecurityIngressGroupRules
-  ]*/
+resource "oci_bastion_session" "ssh_via_bastion_service_ESMasterNode1" {
 
-  count      = var.use_bastion_service ? 7 : 0
+  count      = var.use_bastion_service ? 1 : 0
   bastion_id = oci_bastion_bastion.bastion-service[0].id
 
   key_details {
@@ -30,12 +22,12 @@ resource "oci_bastion_session" "ssh_via_bastion_service" {
   }
   target_resource_details {
     session_type       = "MANAGED_SSH"
-    target_resource_id = oci_core_instance.tomcat-server[count.index].id
+    target_resource_id = oci_core_instance.ESMasterNode1.id
 
     #Optional
     target_resource_operating_system_user_name = "opc"
     target_resource_port                       = 22
-    target_resource_private_ip_address         = oci_core_instance.tomcat-server[count.index].private_ip
+    target_resource_private_ip_address         = oci_core_instance.ESMasterNode1.private_ip
   }
 
   display_name           = "ssh_via_bastion_service"
@@ -44,9 +36,150 @@ resource "oci_bastion_session" "ssh_via_bastion_service" {
 }
 
 
+resource "oci_bastion_session" "ssh_via_bastion_service_ESDataNode1" {
+
+  count      = var.use_bastion_service ? 1 : 0
+  bastion_id = oci_bastion_bastion.bastion-service[0].id
+
+  key_details {
+    public_key_content = tls_private_key.public_private_key_pair.public_key_openssh
+  }
+  target_resource_details {
+    session_type       = "MANAGED_SSH"
+    target_resource_id = oci_core_instance.ESDataNode1.id
+
+    #Optional
+    target_resource_operating_system_user_name = "opc"
+    target_resource_port                       = 22
+    target_resource_private_ip_address         = oci_core_instance.ESDataNode1.private_ip
+  }
+
+  display_name           = "ssh_via_bastion_service"
+  key_type               = "PUB"
+  session_ttl_in_seconds = 1800
+}
+
+resource "oci_bastion_session" "ssh_via_bastion_service_ESDataNode2" {
+
+  count      = var.use_bastion_service ? 1 : 0
+  bastion_id = oci_bastion_bastion.bastion-service[0].id
+
+  key_details {
+    public_key_content = tls_private_key.public_private_key_pair.public_key_openssh
+  }
+  target_resource_details {
+    session_type       = "MANAGED_SSH"
+    target_resource_id = oci_core_instance.ESDataNode2.id
+
+    #Optional
+    target_resource_operating_system_user_name = "opc"
+    target_resource_port                       = 22
+    target_resource_private_ip_address         = oci_core_instance.ESDataNode2.private_ip
+  }
+
+  display_name           = "ssh_via_bastion_service"
+  key_type               = "PUB"
+  session_ttl_in_seconds = 1800
+}
+
+resource "oci_bastion_session" "ssh_via_bastion_service_ESMasterNode2" {
+
+  count      = var.use_bastion_service ? 1 : 0
+  bastion_id = oci_bastion_bastion.bastion-service[0].id
+
+  key_details {
+    public_key_content = tls_private_key.public_private_key_pair.public_key_openssh
+  }
+  target_resource_details {
+    session_type       = "MANAGED_SSH"
+    target_resource_id = oci_core_instance.ESMasterNode2.id
+
+    #Optional
+    target_resource_operating_system_user_name = "opc"
+    target_resource_port                       = 22
+    target_resource_private_ip_address         = oci_core_instance.ESMasterNode2.private_ip
+  }
+
+  display_name           = "ssh_via_bastion_service"
+  key_type               = "PUB"
+  session_ttl_in_seconds = 1800
+}
+
+
+resource "oci_bastion_session" "ssh_via_bastion_service_ESDataNode3" {
+
+  count      = var.use_bastion_service ? 1 : 0
+  bastion_id = oci_bastion_bastion.bastion-service[0].id
+
+  key_details {
+    public_key_content = tls_private_key.public_private_key_pair.public_key_openssh
+  }
+  target_resource_details {
+    session_type       = "MANAGED_SSH"
+    target_resource_id = oci_core_instance.ESDataNode3.id
+
+    #Optional
+    target_resource_operating_system_user_name = "opc"
+    target_resource_port                       = 22
+    target_resource_private_ip_address         = oci_core_instance.ESDataNode3.private_ip
+  }
+
+  display_name           = "ssh_via_bastion_service"
+  key_type               = "PUB"
+  session_ttl_in_seconds = 1800
+}
+
+resource "oci_bastion_session" "ssh_via_bastion_service_ESDataNode4" {
+
+  count      = var.use_bastion_service ? 1 : 0
+  bastion_id = oci_bastion_bastion.bastion-service[0].id
+
+  key_details {
+    public_key_content = tls_private_key.public_private_key_pair.public_key_openssh
+  }
+  target_resource_details {
+    session_type       = "MANAGED_SSH"
+    target_resource_id = oci_core_instance.ESDataNode4.id
+
+    #Optional
+    target_resource_operating_system_user_name = "opc"
+    target_resource_port                       = 22
+    target_resource_private_ip_address         = oci_core_instance.ESDataNode4.private_ip
+  }
+
+  display_name           = "ssh_via_bastion_service"
+  key_type               = "PUB"
+  session_ttl_in_seconds = 1800
+}
+
+resource "oci_bastion_session" "ssh_via_bastion_service_ESMasterNode3" {
+
+  count      = var.use_bastion_service ? 1 : 0
+  bastion_id = oci_bastion_bastion.bastion-service[0].id
+
+  key_details {
+    public_key_content = tls_private_key.public_private_key_pair.public_key_openssh
+  }
+  target_resource_details {
+    session_type       = "MANAGED_SSH"
+    target_resource_id = oci_core_instance.ESMasterNode3.id
+
+    #Optional
+    target_resource_operating_system_user_name = "opc"
+    target_resource_port                       = 22
+    target_resource_private_ip_address         = oci_core_instance.ESMasterNode3.private_ip
+  }
+
+  display_name           = "ssh_via_bastion_service"
+  key_type               = "PUB"
+  session_ttl_in_seconds = 1800
+}
+
+
+
 /*resource "oci_core_instance" "bastion_instance" {
   count               = var.use_bastion_service ? 0 : 1
-  availability_domain = var.availablity_domain_name == "" ? data.oci_identity_availability_domains.ADs.availability_domains[var.availablity_domain_number]["name"] : var.availablity_domain_name
+  availability_domain = var.availablity_domain_name == "" ? data.oci_identity_availability_domains.ADs.availability_domains[var.availability_domain_number]["name"] : var.availability_domain_name
   compartment_id      = var.compartment_ocid
   display_name        = "BastionVM"
   shape               = var.InstanceShape

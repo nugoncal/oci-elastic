@@ -25,7 +25,7 @@ resource "null_resource" "ESMasterNode1_BootStrap" {
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
-      bastion_host = oci_core_instance.BastionHost.public_ip
+      bastion_host = oci_core_instance.BastionHost[0].public_ip
       bastion_port = "22"
       bastion_user = "opc"
       bastion_private_key = tls_private_key.public_private_key_pair.private_key_pem
@@ -43,7 +43,7 @@ resource "null_resource" "ESMasterNode1_BootStrap" {
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
-      bastion_host = oci_core_instance.BastionHost.public_ip
+      bastion_host = oci_core_instance.BastionHost[0].public_ip
       bastion_port = "22"
       bastion_user = "opc"
       bastion_private_key = tls_private_key.public_private_key_pair.private_key_pem
@@ -67,7 +67,7 @@ resource "null_resource" "ESMasterNode2_BootStrap" {
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
-      bastion_host = oci_core_instance.BastionHost.public_ip
+      bastion_host = oci_core_instance.BastionHost[0].public_ip
       bastion_port = "22"
       bastion_user = "opc"
       bastion_private_key = tls_private_key.public_private_key_pair.private_key_pem
@@ -85,7 +85,7 @@ resource "null_resource" "ESMasterNode2_BootStrap" {
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
-      bastion_host = oci_core_instance.BastionHost.public_ip
+      bastion_host = oci_core_instance.BastionHost[0].public_ip
       bastion_port = "22"
       bastion_user = "opc"
       bastion_private_key = tls_private_key.public_private_key_pair.private_key_pem
@@ -109,7 +109,7 @@ resource "null_resource" "ESMasterNode3_BootStrap" {
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
-      bastion_host = oci_core_instance.BastionHost.public_ip
+      bastion_host = oci_core_instance.BastionHost[0].public_ip
       bastion_port = "22"
       bastion_user = "opc"
       bastion_private_key = tls_private_key.public_private_key_pair.private_key_pem
@@ -127,7 +127,7 @@ resource "null_resource" "ESMasterNode3_BootStrap" {
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
-      bastion_host = oci_core_instance.BastionHost.public_ip
+      bastion_host = oci_core_instance.BastionHost[0].public_ip
       bastion_port = "22"
       bastion_user = "opc"
       bastion_private_key = tls_private_key.public_private_key_pair.private_key_pem
@@ -151,7 +151,7 @@ resource "null_resource" "ESDataNode1_BootStrap" {
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
-      bastion_host = oci_core_instance.BastionHost.public_ip
+      bastion_host = oci_core_instance.BastionHost[0].public_ip
       bastion_port = "22"
       bastion_user = "opc"
       bastion_private_key = tls_private_key.public_private_key_pair.private_key_pem
@@ -169,7 +169,7 @@ resource "null_resource" "ESDataNode1_BootStrap" {
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
-      bastion_host = oci_core_instance.BastionHost.public_ip
+      bastion_host = oci_core_instance.BastionHost[0].public_ip
       bastion_port = "22"
       bastion_user = "opc"
       bastion_private_key = tls_private_key.public_private_key_pair.private_key_pem
@@ -193,7 +193,7 @@ resource "null_resource" "ESDataNode2_BootStrap" {
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
-      bastion_host = oci_core_instance.BastionHost.public_ip
+      bastion_host = oci_core_instance.BastionHost[0].public_ip
       bastion_port = "22"
       bastion_user = "opc"
       bastion_private_key = tls_private_key.public_private_key_pair.private_key_pem
@@ -211,7 +211,7 @@ resource "null_resource" "ESDataNode2_BootStrap" {
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
-      bastion_host = oci_core_instance.BastionHost.public_ip
+      bastion_host = oci_core_instance.BastionHost[0].public_ip
       bastion_port = "22"
       bastion_user = "opc"
       bastion_private_key = tls_private_key.public_private_key_pair.private_key_pem
@@ -235,7 +235,7 @@ resource "null_resource" "ESDataNode3_BootStrap" {
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
-      bastion_host = oci_core_instance.BastionHost.public_ip
+      bastion_host = oci_core_instance.BastionHost[0].public_ip
       bastion_port = "22"
       bastion_user = "opc"
       bastion_private_key = tls_private_key.public_private_key_pair.private_key_pem
@@ -253,7 +253,7 @@ resource "null_resource" "ESDataNode3_BootStrap" {
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
-      bastion_host = oci_core_instance.BastionHost.public_ip
+      bastion_host = oci_core_instance.BastionHost[0].public_ip
       bastion_port = "22"
       bastion_user = "opc"
       bastion_private_key = tls_private_key.public_private_key_pair.private_key_pem
@@ -277,7 +277,7 @@ resource "null_resource" "ESDataNode4_BootStrap" {
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
-      bastion_host = oci_core_instance.BastionHost.public_ip
+      bastion_host = oci_core_instance.BastionHost[0].public_ip
       bastion_port = "22"
       bastion_user = "opc"
       bastion_private_key = tls_private_key.public_private_key_pair.private_key_pem
@@ -295,7 +295,7 @@ resource "null_resource" "ESDataNode4_BootStrap" {
       script_path = "/home/opc/myssh.sh"
       agent       = false
       timeout     = "10m"
-      bastion_host = oci_core_instance.BastionHost.public_ip
+      bastion_host = oci_core_instance.BastionHost[0].public_ip
       bastion_port = "22"
       bastion_user = "opc"
       bastion_private_key = tls_private_key.public_private_key_pair.private_key_pem

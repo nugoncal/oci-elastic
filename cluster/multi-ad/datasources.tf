@@ -10,7 +10,7 @@ data "oci_identity_availability_domains" "ADs" {
 data "oci_core_vnic_attachments" "BastionVnics" {
   compartment_id      = var.compartment_ocid
   availability_domain = data.oci_identity_availability_domains.ADs.availability_domains[0]["name"]
-  instance_id         = oci_core_instance.BastionHost.id
+  instance_id         = oci_core_instance.BastionHost[0].id
 }
 
 # Gets the OCID of the first vNIC on the bastion host

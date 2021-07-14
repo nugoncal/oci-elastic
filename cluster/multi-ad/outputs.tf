@@ -4,7 +4,7 @@
 # Output the private and public IPs of the instance
 
 output "BastionPublicIP" {
-  value = oci_core_instance.BastionHost.public_ip
+  value = oci_core_instance.BastionHost[0].public_ip
 }
 
 output "Kibana_URL_via_LBaaS" {
@@ -20,6 +20,14 @@ output "generated_ssh_private_key" {
   sensitive = true
 }
 
-output "bastion_ssh_metadata" {
-  value = oci_bastion_session.ssh_via_bastion_service.*.ssh_metadata
+output "bastion_ssh_metadata_ESMasterNode1" {
+  value = oci_bastion_session.ssh_via_bastion_service_ESMasterNode1.*.ssh_metadata
+}
+
+output "bastion_ssh_metadata_ESDataNode1" {
+  value = oci_bastion_session.ssh_via_bastion_service_ESDataNode1.*.ssh_metadata
+}
+
+output "bastion_ssh_metadata_ESDataNode2" {
+  value = oci_bastion_session.ssh_via_bastion_service_ESDataNode2.*.ssh_metadata
 }
