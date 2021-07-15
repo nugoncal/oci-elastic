@@ -51,6 +51,10 @@ resource "oci_core_instance" "ESMasterNode1" {
   timeouts {
     create = var.create_timeout
   }
+
+  provisioner "local-exec" {
+    command = "sleep 240"
+  }
 }
 
 resource "oci_core_instance" "ESMasterNode2" {
@@ -102,6 +106,10 @@ resource "oci_core_instance" "ESMasterNode2" {
 
   timeouts {
     create = var.create_timeout
+  }
+
+  provisioner "local-exec" {
+    command = "sleep 240"
   }
 }
 
@@ -155,6 +163,10 @@ resource "oci_core_instance" "ESMasterNode3" {
   timeouts {
     create = var.create_timeout
   }
+
+  provisioner "local-exec" {
+    command = "sleep 240"
+  }
 }
 
 resource "oci_core_instance" "ESDataNode1" {
@@ -206,6 +218,10 @@ resource "oci_core_instance" "ESDataNode1" {
 
   timeouts {
     create = var.create_timeout
+  }
+
+  provisioner "local-exec" {
+    command = "sleep 240"
   }
 }
 
@@ -259,6 +275,11 @@ resource "oci_core_instance" "ESDataNode2" {
   timeouts {
     create = var.create_timeout
   }
+
+  provisioner "local-exec" {
+    command = "sleep 240"
+  }
+
 }
 
 resource "oci_core_instance" "ESDataNode3" {
@@ -311,6 +332,10 @@ resource "oci_core_instance" "ESDataNode3" {
   timeouts {
     create = var.create_timeout
   }
+
+  provisioner "local-exec" {
+    command = "sleep 240"
+  }
 }
 
 resource "oci_core_instance" "ESDataNode4" {
@@ -362,6 +387,10 @@ resource "oci_core_instance" "ESDataNode4" {
 
   timeouts {
     create = var.create_timeout
+  }
+
+  provisioner "local-exec" {
+    command = "sleep 240"
   }
 }
 

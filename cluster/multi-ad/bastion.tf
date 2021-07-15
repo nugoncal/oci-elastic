@@ -5,7 +5,7 @@ resource "oci_bastion_bastion" "bastion-service" {
   count                        = var.use_bastion_service ? 1 : 0
   bastion_type                 = "STANDARD"
   compartment_id               = var.compartment_ocid
-  target_subnet_id             = oci_core_subnet.PrivSubnetAD1.id
+  target_subnet_id             = oci_core_subnet.BastionSubnetAD1.id
   client_cidr_block_allow_list = ["0.0.0.0/0"]
   defined_tags                 = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
   name                         = "BastionService${random_id.tag.hex}"

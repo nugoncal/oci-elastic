@@ -8,20 +8,23 @@ data "oci_identity_availability_domains" "ADs" {
 
 # Gets a list of vNIC attachments on the bastion host
 data "oci_core_vnic_attachments" "BastionVnics" {
+  count               = var.use_bastion_service ? 0 : 1
   compartment_id      = var.compartment_ocid
   availability_domain = data.oci_identity_availability_domains.ADs.availability_domains[0]["name"]
-  instance_id         = oci_core_instance.BastionHost[0].id
+  instance_id         = oci_core_instance.BastionHost[count.index].id
 }
 
 # Gets the OCID of the first vNIC on the bastion host
 data "oci_core_vnic" "BastionVnic" {
-  vnic_id = data.oci_core_vnic_attachments.BastionVnics.vnic_attachments[0]["vnic_id"]
+  count               = var.use_bastion_service ? 0 : 1
+  vnic_id             = data.oci_core_vnic_attachments.BastionVnics[count.index].vnic_attachments[0]["vnic_id"]
 }
 
 # Get the Private of bastion host
 data "oci_core_private_ips" "BastionPrivateIPs" {
-  ip_address = data.oci_core_vnic.BastionVnic.private_ip_address
-  subnet_id  = oci_core_subnet.BastionSubnetAD1.id
+  count               = var.use_bastion_service ? 0 : 1
+  ip_address          = data.oci_core_vnic.BastionVnic[count.index].private_ip_address
+  subnet_id           = oci_core_subnet.BastionSubnetAD1.id
 }
 
 

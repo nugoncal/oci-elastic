@@ -16,6 +16,13 @@ resource "oci_core_internet_gateway" "OCI_ES_IGW" {
   defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
+resource "oci_core_nat_gateway" "OCI_ES_NAT" {
+  compartment_id = var.compartment_ocid
+  vcn_id         = oci_core_virtual_network.OCI_ES_VCN.id
+  display_name   = "OCI_ES_NAT"
+  defined_tags   = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+}
+
 resource "oci_core_route_table" "OCI_PUB_RTB" {
   compartment_id = var.compartment_ocid
   vcn_id         = oci_core_virtual_network.OCI_ES_VCN.id
@@ -30,6 +37,7 @@ resource "oci_core_route_table" "OCI_PUB_RTB" {
 }
 
 resource "oci_core_route_table" "OCI_ES_RTB" {
+  #count          = var.use_bastion_service ? 1 : 0
   compartment_id = var.compartment_ocid
   vcn_id         = oci_core_virtual_network.OCI_ES_VCN.id
   display_name   = "OCI_ES_RTB"
@@ -37,7 +45,8 @@ resource "oci_core_route_table" "OCI_ES_RTB" {
   route_rules {
     destination       = "0.0.0.0/0"
     destination_type  = "CIDR_BLOCK"
-    network_entity_id = data.oci_core_private_ips.BastionPrivateIPs.private_ips[0]["id"]
+    #network_entity_id = data.oci_core_private_ips.BastionPrivateIPs[count.index].private_ips[0]["id"]
+    network_entity_id = oci_core_nat_gateway.OCI_ES_NAT.id
   }
   defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }

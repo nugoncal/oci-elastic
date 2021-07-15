@@ -4,7 +4,7 @@
 # Output the private and public IPs of the instance
 
 output "BastionPublicIP" {
-  value = oci_core_instance.BastionHost[0].public_ip
+  value = oci_core_instance.BastionHost.*.public_ip
 }
 
 output "Kibana_URL_via_LBaaS" {
